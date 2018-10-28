@@ -1,0 +1,15 @@
+﻿@model NewsAgency.App.Models.Articles.AdminArticleViewModel
+
+@{
+    ViewBag.Title = "_AdminArticleView";
+}
+
+<tr>
+    <td>@Model.Title</td>
+    <td>@Model.Author</td>
+    <td>@Model.Category</td>
+    <td>@Model.Content</td>
+    <td>@Model.CreatedOn</td>
+    <td>@Html.ActionLink("Edit","Edit",null,new{id=Model.Id}, new { type = "button", @class = "btn btn-primary" })</td>
+    <td>@Html.ActionLink("Delete", "Delete",null,new{id=Model.Id},new{ type = "button", @class="btn btn-warning"})</td>
+</tr>

@@ -18,7 +18,7 @@ namespace NewsAgency.App.Controllers
         public BaseController()
         {
             DbContext = new NewsDbContext();
-            Mapper = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>()).CreateMapper();
+            //this.Mapper = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>()).CreateMapper();
         }
     }
 }

@@ -23,6 +23,9 @@ namespace NewsAgency.App.Models.Articles
 
         [Required]
         public virtual Author Author { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime CreatedOn { get; set; }
     }
-   // title, content, category, author, date of creation and an option to like/dislike(). 
 }

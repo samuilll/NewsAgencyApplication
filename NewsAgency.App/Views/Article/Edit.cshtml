@@ -1,0 +1,45 @@
+﻿@model NewsAgency.App.Models.Articles.ArticleEditViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3>Edit @Model.Title Article</h3>
+    </div>
+    @using (Html.BeginForm("Edit", "Article",
+     FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="panel-body">
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group">
+                @Html.Label("Title")
+                @Html.TextBox(Model.Title, null,
+                    new {@class = "form-control"})
+                @Html.ValidationMessage(Model.Title)
+            </div>
+            <div class="form-group">
+                @Html.Label("Content")
+                @Html.TextArea(Model.Content, null,
+                    new {@class = "form-control", rows = 5})
+                @Html.ValidationMessage(Model.Content)
+            </div>
+            <div class="form-group">
+                @Html.Label("Category")
+                @Html.TextBox(Model.Category.Name, null,
+                    new {@class = "form-control"})
+                @Html.ValidationMessage(Model.Category.Name)
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Cancel and return to List", "All", null, new {
+            @class = "btn btn-default"
+            })
+        </div>
+    }
+</div>
+

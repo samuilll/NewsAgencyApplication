@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using New.Models;
@@ -122,6 +123,7 @@ namespace News.Repository
                 {
                     new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[0],
                         Category = categories[1],
                         Title = "Yesterday",
@@ -134,6 +136,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[5],
                         Category = categories[7],
                         Title = "Barcelona",
@@ -145,6 +148,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[3],
                         Category = categories[7],
                         Title = "80's",
@@ -156,6 +160,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[8],
                         Category = categories[5],
                         Title = "Stella",
@@ -168,6 +173,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[3],
                         Category = categories[6],
                         Title = "Bomb",
@@ -180,6 +186,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[2],
                         Category = categories[8],
                         Title = "LastYear",
@@ -192,6 +199,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[0],
                         Category = categories[1],
                         Title = "Tomorrow",
@@ -204,6 +212,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[0],
                         Category = categories[1],
                         Title = "CookedMeat",
@@ -216,6 +225,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[4],
                         Category = categories[4],
                         Title = "Chikago Bulls Title",
@@ -228,6 +238,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[6],
                         Category = categories[2],
                         Title = "BeforeWar",
@@ -240,6 +251,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[1],
                         Category = categories[0],
                         Title = "Hi",
@@ -252,6 +264,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[4],
                         Category = categories[8],
                         Title = "Preferential Prices",
@@ -264,6 +277,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[0],
                         Category = categories[1],
                         Title = "Bau",
@@ -276,6 +290,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[2],
                         Category = categories[8],
                         Title = "CartingRace",
@@ -288,6 +303,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[5],
                         Category = categories[5],
                         Title = "NO,no,no",
@@ -300,6 +316,7 @@ namespace News.Repository
                     },
                       new Article()
                     {
+                        CreatedOn = DateTime.UtcNow,
                         Author = authors[2],
                         Category = categories[8],
                         Title = "Never",

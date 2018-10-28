@@ -25,6 +25,9 @@ namespace New.Models
         [Required]
         public virtual Author Author { get; set; }
 
+        [Required]
+        public DateTime CreatedOn { get; set; }
+
         public virtual Like Likes { get; set; }
     }
 }

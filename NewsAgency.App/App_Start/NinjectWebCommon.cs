@@ -1,3 +1,6 @@
+using NewsAgency.Services;
+using NewsAgency.Services.Contracts;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NewsAgency.App.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NewsAgency.App.App_Start.NinjectWebCommon), "Stop")]
 
@@ -64,10 +67,9 @@ namespace NewsAgency.App.App_Start
         {
             // kernel.Bind<IMapper>().ToMethod(new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>()).CreateMapper());
 
-            kernel.Bind<NewsDbContext>().ToSelf().InRequestScope();
-
-            kernel.Bind<IMapper>().ToMethod(ctx =>
-             new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>()), type => ctx.Kernel.Get(type)));
+            kernel.Bind<IArticleService>().To<ArticleService>().InRequestScope();
+            //kernel.Bind<IMapper>().ToMethod(ctx =>
+            // new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>()), type => ctx.Kernel.Get(type)));
         }        
     }
 }
