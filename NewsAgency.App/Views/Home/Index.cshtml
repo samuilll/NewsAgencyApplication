@@ -1,0 +1,24 @@
+﻿@using New.Models
+@using NewsAgency.App.Models.Articles
+@model NewsAgency.App.Models.Articles.HomeViewModel
+
+<div class="well text-justify text-center col-md-12">
+    <span>Most liked categories:</span>
+    @foreach (ArticleViewModel article in Model.MostPopularArticles)
+    {
+        @Html.Partial("_ArticleInList", article)
+    }
+</div>
+<div class="text-justify text-capitalize">Latest articles by category:</div>
+@foreach (CategoryViewModel categoryWithArticles in Model.LatestArticlesByCategories)
+{
+    <div class="well text-justify text-center col-md-12">
+        <span> @categoryWithArticles.Name:</span>
+
+        @foreach (ArticleViewModel article in categoryWithArticles.LatestArticles)
+        {
+            @Html.Partial("_ArticleInList", article)
+        }
+    </div>
+}
+}

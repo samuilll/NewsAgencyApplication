@@ -1,0 +1,12 @@
+﻿@using NewsAgency.App.Models.Articles
+@model NewsAgency.App.Models.Articles.ArticleViewModel
+
+
+<div>
+<span>
+    @Html.ActionLink(@Model.Title,"Details","Article",new { id = Model.Id})
+</span>
+    <h6>
+        WrittenBy: @Model.Author.FirstName @Model.Author.LastName
+    </h6>
+</div>
