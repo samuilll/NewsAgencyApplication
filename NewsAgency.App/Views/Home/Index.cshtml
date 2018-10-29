@@ -3,7 +3,8 @@
 @model NewsAgency.App.Models.Articles.HomeViewModel
 
 <div class="well text-justify text-center col-md-12">
-    <span>Most liked categories:</span>
+    <span class="text-capitalize text-danger">Most liked categories:</span>
+    <hr style="border: groove"/>
     @foreach (ArticleViewModel article in Model.MostPopularArticles)
     {
         @Html.Partial("_ArticleInList", article)

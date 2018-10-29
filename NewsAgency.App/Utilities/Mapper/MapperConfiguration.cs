@@ -13,10 +13,12 @@ namespace NewsAgency.App.Utilities.Mapper
     {
         public MappingProfile()
         {
-            CreateMap<Article, ArticleDetailsViewModel>().ReverseMap();
+            CreateMap<Article, ArticleDetailsViewModel>()
+                .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.Likes.Count))
+                .ReverseMap();
 
             CreateMap<Article, AdminArticleViewModel>()
-                .ForMember(dest=>dest.Likes,opt=>opt.MapFrom(src=>src.Likes.Value))
+                .ForMember(dest=>dest.Likes,opt=>opt.MapFrom(src=>src.Likes.Count))
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author.Username))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
                 .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn.ToString("dd-MM-yyyy")))

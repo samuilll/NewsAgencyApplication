@@ -73,11 +73,11 @@ namespace NewsAgency.Services
                 }
                 case "likescountdescending":
                 {
-                    return this.context.Articles.OrderByDescending(a => a.Likes.Value).ToList();
+                    return this.context.Articles.OrderByDescending(a => a.Likes.Count).ToList();
                 }
                 case "likescount":
                 {
-                    return this.context.Articles.OrderBy(a => a.Likes.Value).ToList();
+                    return this.context.Articles.OrderBy(a => a.Likes.Count).ToList();
                 }
                 case "categorydescending":
                 {

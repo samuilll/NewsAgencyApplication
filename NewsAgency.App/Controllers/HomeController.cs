@@ -23,7 +23,7 @@ namespace NewsAgency.App.Controllers
         {
             var mostPopularArticles = DbContext
                 .Articles
-                .OrderByDescending(a => a.Likes.Value)
+                .OrderByDescending(a => a.Likes.Count)
                 .AsQueryable()
                 .ProjectTo<ArticleViewModel>(Mapper.ConfigurationProvider)
                 .Take(3)

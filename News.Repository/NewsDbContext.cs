@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Linq.Expressions;
 using Microsoft.AspNet.Identity.EntityFramework;
 using New.Models;
 
@@ -13,6 +14,8 @@ namespace News.Repository
         public IDbSet<Category> Categories { get; set; }
 
         public IDbSet<Author> Authors { get; set; }
+
+        public IDbSet<Like> Likes { get; set; }
 
 
         public static NewsDbContext Create()
@@ -29,6 +32,8 @@ namespace News.Repository
 
         protected override void OnModelCreating(DbModelBuilder builder)
         {
+            builder.Entity<Like>().HasKey(l => new {l.ArticleId, l.Value});
+
             base.OnModelCreating(builder);
         }
     }

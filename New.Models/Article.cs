@@ -7,6 +7,11 @@ namespace New.Models
 {
    public class Article
     {
+        public Article()
+        {
+            Likes = new List<Like>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -28,6 +33,6 @@ namespace New.Models
         [Required]
         public DateTime CreatedOn { get; set; }
 
-        public virtual Like Likes { get; set; }
+        public virtual IList<Like> Likes { get; set; }
     }
 }

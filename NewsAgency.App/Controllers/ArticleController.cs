@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNet.Identity;
 using New.Models;
 using News.Repository;
 using NewsAgency.App.Models;
@@ -43,6 +44,11 @@ namespace NewsAgency.App.Controllers
             }
 
             var model = Mapper.Map<ArticleDetailsViewModel>(article);
+
+            bool isAlreadyLiked =
+                this.DbContext.Likes.Any(l => l.ArticleId == id && l.Value == this.User.Identity.Name);
+
+            model.IsAlreadyLiked = isAlreadyLiked;
 
             return View(model);
         }
@@ -149,7 +155,6 @@ namespace NewsAgency.App.Controllers
                 CategoryId = category.Id,
                 Content = model.Content,
                 CreatedOn = DateTime.UtcNow,
-                Likes = new Like {Value = 0}
             };
 
             DbContext.Articles.Add(article);
@@ -158,6 +163,32 @@ namespace NewsAgency.App.Controllers
             TempData["success"] = SuccessMessages.ArticleCreatedSuccess;
 
             return RedirectToAction("All");
+        }
+        public ActionResult Like(int articleId)
+        {
+            var Request = this.Request.IsAjaxRequest();
+            Like like = new Like()
+            {
+                ArticleId = articleId,
+                Value = this.User.Identity.GetUserName()
+            };
+
+            this.DbContext.Likes.Add(like);
+            this.DbContext.SaveChanges();
+
+            return this.Content(this.DbContext.Likes.Where(l => l.ArticleId == articleId).Count().ToString());
+        }
+        public ActionResult Unlike(int articleId)
+        {
+            var Request = this.Request.IsAjaxRequest();
+
+            Like like = this.DbContext.Likes.FirstOrDefault(l => l.ArticleId == articleId
+                                                                 && l.Value == this.User.Identity.Name);
+
+            this.DbContext.Likes.Remove(like);
+            this.DbContext.SaveChanges();
+
+            return this.Content(this.DbContext.Likes.Where(l => l.ArticleId == articleId).Count().ToString());
         }
     }
 }
