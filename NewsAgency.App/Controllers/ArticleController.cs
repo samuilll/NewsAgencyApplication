@@ -8,11 +8,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NewsAgency.App.Models;
 
 namespace NewsAgency.App.Controllers
 {
+    [Authorize]
     public class ArticleController : BaseController
     {
+        private const int PerPageArticles = 5;
 
         private IArticleService articleService;
         private ICategoryService categoryService;
@@ -47,19 +50,32 @@ namespace NewsAgency.App.Controllers
             return View(model);
         }
 
-        public ActionResult All(string order=null)
+        public ActionResult All(int page=1,string order="default")
         {
-            List<AdminArticleViewModel> model = this.articleService.GetByOrderCriterion(order)
-                .Select(a => new AdminArticleViewModel()
+            AllArticlesViewModel model = new AllArticlesViewModel()
+            {
+                Articles = this.articleService.GetByOrderCriterion(order)
+                    .Skip((page-1)*PerPageArticles)
+                    .Take(PerPageArticles)
+                    .Select(a => new AdminArticleViewModel()
+                    {
+                        Likes = a.Likes.Value,
+                        Author = a.Author.Username,
+                        Category = a.Category.Name,
+                        Content = a.Content.Substring(0, Math.Min(300, a.Content.Length)) + "...",
+                        CreatedOn = a.CreatedOn.ToString("dd-MM-yyyy"),
+                        Id = a.Id,
+                        Title = a.Title
+                    })
+                    .ToList(),
+                PagingInfo = new PagingInfo()
                 {
-                    Author =a.Author.Username,
-                    Category = a.Category.Name,
-                    Content = a.Content.Substring(0, Math.Min(300,a.Content.Length)) + "...",
-                    CreatedOn = a.CreatedOn.ToString("dd-MM-yyyy"),
-                    Id = a.Id,
-                    Title = a.Title
-                })
-                .ToList();
+                    CurrentPage = page,
+                    ItemsPerPage = PerPageArticles,
+                    TotalItems = this.articleService.GetCount()
+                }
+        };
+            this.ViewBag.Order = order;
 
             return View(model);
         }
@@ -99,7 +115,7 @@ namespace NewsAgency.App.Controllers
 
             return RedirectToAction("All");
         }
-        public ActionResult Delete(int id = 0,string ensure=null)
+        public ActionResult Delete(int id,string ensure=null)
         {
             if (ensure==null)
             {
@@ -143,6 +159,8 @@ namespace NewsAgency.App.Controllers
                 {
                     Name = model.Category
                 };
+
+                this.categoryService.SaveItem(category);
             }
 
             string username = this.User.Identity.Name;
@@ -156,7 +174,7 @@ namespace NewsAgency.App.Controllers
             {
                 Title = model.Title,
                 Author = author,
-                Category = category,
+                CategoryId = category.Id,
                 Content = model.Content,
                 CreatedOn = DateTime.UtcNow,
                 Likes = new Like() { Value = 0}

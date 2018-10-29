@@ -7,11 +7,11 @@ using System.Text;
 
 namespace NewsAgency.App.Utilities.Mapper
 {
-    public class MappingProfile : Profile
+    public static class MapperConfiguration
     {
-        public MappingProfile()
+        public static void Configure(IMapperConfigurationExpression config)
         {
-            CreateMap<Article, ArticleDetailsViewModel>().ReverseMap();
+            config.CreateMap<Article, ArticleDetailsViewModel>().ReverseMap();
 
             //CreateMap<SupplierDto, Supplier>().ReverseMap();
             //CreateMap<PartDto, Part>().ReverseMap();

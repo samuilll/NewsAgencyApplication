@@ -16,5 +16,7 @@ namespace NewsAgency.Services.Contracts
         void EditArticle(int id, string title, string content);
 
         void Delete(int id);
+
+        int GetCount();
     }
 }

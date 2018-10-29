@@ -17,6 +17,7 @@ namespace New.Models
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(20)]
         [Index(IsUnique = true)]
         public string Name { get; set; }
 

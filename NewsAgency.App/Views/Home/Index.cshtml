@@ -10,7 +10,7 @@
     }
 </div>
 <div class="text-justify text-capitalize">Latest articles by category:</div>
-@foreach (CategoryViewModel categoryWithArticles in Model.LatestArticlesByCategories)
+@foreach (CategoryWithArticlesViewModel categoryWithArticles in Model.LatestArticlesByCategories)
 {
     <div class="well text-justify text-center col-md-12">
         <span> @categoryWithArticles.Name:</span>

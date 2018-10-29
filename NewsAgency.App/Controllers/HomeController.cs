@@ -33,9 +33,9 @@ namespace NewsAgency.App.Controllers
                 .ToList();
 
 
-            List<CategoryViewModel> categories = DbContext.Categories.ToList()
+            List<CategoryWithArticlesViewModel> categories = DbContext.Categories.ToList()
                 .Where(c=>c.Articles.Any())
-                .Select(c => new CategoryViewModel()
+                .Select(c => new CategoryWithArticlesViewModel()
                 {
                     Name = c.Name,
                     LatestArticles = c.Articles.OrderBy(a=>a.Id).

@@ -1,0 +1,32 @@
+﻿@using NewsAgency.App.HtmlHelpers
+@using NewsAgency.App.Models.Articles
+@using NewsAgency.App.Models.Categories
+@model NewsAgency.App.Models.Categories.AllCategoriesViewModel
+@{
+    ViewBag.Title = "All";
+}
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <thead>
+
+    <tr>
+        <th>
+            @Html.ActionLink("Name", "All", new { order = ViewBag.Order != "Name" ? "Name" : "NameDescending" })
+        </th>
+        <th>
+            @Html.ActionLink("Number Of Articles", "All", new { order = ViewBag.Order != "ArticlesNumber" ? "ArticlesNumber" : "ArticlesNumberDescending" })
+        </th>
+        <th colspan="2">
+            @Html.ActionLink("Create New Category", "Create", null, new {type = "button", @class = "btn btn-success"})
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (CategoryViewModel category in Model.Categories)
+        {
+            @Html.Partial("_AdminCategoryView", category)
+        }
+    </tbody>
+</table>
+
+@Html.PageLinks(Model.PagingInfo, x => Url.Action("All", new { page = x,order = ViewBag.Order }))
+

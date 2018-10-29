@@ -14,6 +14,12 @@ namespace NewsAgency.App
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "ArticlesAll",
+                url: "Articles/Page{page}/Order-{order}",
+                defaults: new { controller = "Article", action = "All", order = "default" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

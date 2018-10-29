@@ -10,6 +10,8 @@ namespace NewsAgency.App.Models.Articles
     {
         public int Id { get; set; }
 
+        public int Likes { get; set; }
+
         public string Title { get; set; }
 
         public string Content { get; set; }

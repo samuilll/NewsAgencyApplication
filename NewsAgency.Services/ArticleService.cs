@@ -25,6 +25,11 @@ namespace NewsAgency.Services
             this.context.SaveChanges();
         }
 
+        public int GetCount()
+        {
+            return this.context.Articles.Count();
+        }
+
         public void EditArticle(int id, string title, string content)
         {
             Article article = this.context.Articles.Find(id);
@@ -43,13 +48,13 @@ namespace NewsAgency.Services
 
         public ICollection<Article> GetByOrderCriterion(string order)
         {
-            if (order==null)
-            {                
-                    return this.context.Articles.ToList();
-            }
+
             switch (order.ToLower())
-            {      
-                
+            {
+                case "default":
+                {
+                    return this.context.Articles.ToList();
+                }
                 case "title":
                 {
                     return this.context.Articles.OrderBy(a=>a.Title).ToList();
@@ -57,6 +62,30 @@ namespace NewsAgency.Services
                 case "createdon":
                 {
                     return this.context.Articles.OrderBy(a => a.CreatedOn).ToList();
+                }
+                case "titledescending":
+                {
+                    return this.context.Articles.OrderByDescending(a => a.Title).ToList();
+                }
+                case "createdondescending":
+                {
+                    return this.context.Articles.OrderByDescending(a => a.CreatedOn).ToList();
+                }
+                case "likescountdescending":
+                {
+                    return this.context.Articles.OrderByDescending(a => a.Likes.Value).ToList();
+                }
+                case "likescount":
+                {
+                    return this.context.Articles.OrderBy(a => a.Likes.Value).ToList();
+                }
+                case "categorydescending":
+                {
+                    return this.context.Articles.OrderByDescending(a => a.Category.Name).ToList();
+                }
+                case "category":
+                {
+                    return this.context.Articles.OrderBy(a => a.Category.Name).ToList();
                 }
                 default: break;
             }

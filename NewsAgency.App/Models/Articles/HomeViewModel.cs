@@ -9,6 +9,6 @@ namespace NewsAgency.App.Models.Articles
     {
         public List<ArticleViewModel> MostPopularArticles { get; set; }
 
-        public List<CategoryViewModel> LatestArticlesByCategories { get; set; }
+        public List<CategoryWithArticlesViewModel> LatestArticlesByCategories { get; set; }
     }
 }

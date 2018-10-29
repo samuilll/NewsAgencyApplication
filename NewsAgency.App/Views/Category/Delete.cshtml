@@ -1,13 +1,13 @@
-﻿@model NewsAgency.App.Models.Articles.ArticleDeleteViewModel
+﻿@model NewsAgency.App.Models.Categories.CategoryDeleteViewModel
 
 @{
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete Article</h2>
+<h2>Delete Category</h2>
 
 <div class="well">
-    <span class="text-warning">Are you sure you want to delete @Model.Title by @Model.Author.Username</span>
+    <span class="text-warning">Are you sure you want to delete @Model.Name</span>
     @Html.ActionLink("Back to all", "All", null, new { @class = "btn btn-primary" })
     @Html.ActionLink("Delete", "Delete", new { ensure = "yes" }, new { @class = "btn btn-primary" })
 </div>

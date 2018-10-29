@@ -13,6 +13,12 @@ namespace NewsAgency.App.Utilities
 
         public const string ArticleDeletedSuccess = "Successfully deleted article!";
 
+        public const string CategoryEditSuccess = "Successfully edited category!";
+
+        public const string CategoryCreatedSuccess = "Successfully created category!";
+
+        public const string CategoryDeletedSuccess = "Successfully deleted category!";
+
 
     }
 }
