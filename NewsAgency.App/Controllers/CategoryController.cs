@@ -1,54 +1,54 @@
-﻿using New.Models;
-using NewsAgency.App.Models.Articles;
+﻿using System.Linq;
+using System.Web.Mvc;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using New.Models;
+using News.Repository;
+using NewsAgency.App.Models;
 using NewsAgency.App.Models.Categories;
 using NewsAgency.App.Utilities;
 using NewsAgency.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using NewsAgency.App.Models;
 
 namespace NewsAgency.App.Controllers
 {
     [Authorize]
-    public class CategoryController : BaseController
+    public class CategoryController : Controller
     {
         private const int PerPageItems = 5;
 
         private IArticleService articleService;
-        private ICategoryService categoryService;
+        private readonly ICategoryService categoryService;
+        private NewsDbContext DbContext;
+        private readonly IMapper Mapper;
 
-        public CategoryController(IArticleService articleService, ICategoryService categoryService)
+        public CategoryController(IArticleService articleService,
+            ICategoryService categoryService, NewsDbContext dbContext, IMapper mapper)
         {
             this.articleService = articleService;
             this.categoryService = categoryService;
+            DbContext = dbContext;
+            Mapper = mapper;
         }
 
-
-        public ActionResult All(int page = 1,string order = "default")
+        public ActionResult All(int page = 1, string order = "default")
         {
-            AllCategoriesViewModel model = new AllCategoriesViewModel()
+            var model = new AllCategoriesViewModel
             {
-                Categories = this.categoryService.GetAllByCriteria(order)
+                Categories = categoryService.GetAllByCriteria(order)
                     .Skip((page - 1) * PerPageItems)
                     .Take(PerPageItems)
-                    .Select(c => new CategoryViewModel()
-                    {
-                        Id = c.Id,
-                        Name = c.Name,
-                        NumberOfArticles = c.Articles.Count()
-                    })
+                    .AsQueryable()
+                    .ProjectTo<CategoryViewModel>(Mapper.ConfigurationProvider)
                     .ToList(),
-                PagingInfo = new PagingInfo()
+                PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = PerPageItems,
-                    TotalItems = this.categoryService.GetCount()
+                    TotalItems = categoryService.GetCount()
                 }
             };
 
-            this.ViewBag.Order = order;
+            ViewBag.Order = order;
 
             return View(model);
         }
@@ -56,34 +56,28 @@ namespace NewsAgency.App.Controllers
 
         public ActionResult Edit(int id)
         {
-            Category category = this.categoryService.GetById(id);
+            var category = categoryService.GetById(id);
 
             if (category == null)
             {
-                this.TempData["error"] = ErrorMessages.NoSuchCategory;
+                TempData["error"] = ErrorMessages.NoSuchCategory;
 
                 return View("All");
             }
 
-            CategoryEditViewModel model = new CategoryEditViewModel()
-            {
-                Id = category.Id,
-                Name = category.Name
-            };
+            var model = Mapper.Map<CategoryEditViewModel>(category);
 
             return View(model);
         }
+
         [HttpPost]
         public ActionResult Edit(CategoryEditViewModel model)
         {
-            if (!this.ModelState.IsValid)
-            {
-                return View();
-            }
+            if (!ModelState.IsValid) return View();
 
-            this.categoryService.Edit(model.Id, model.Name);
+            categoryService.Edit(model.Id, model.Name);
 
-            this.TempData["success"] = SuccessMessages.CategoryEditSuccess;
+            TempData["success"] = SuccessMessages.CategoryEditSuccess;
 
             return RedirectToAction("All");
         }
@@ -92,19 +86,16 @@ namespace NewsAgency.App.Controllers
         {
             if (ensure == null)
             {
-                Category category = this.categoryService.GetById(id);
+                var category = categoryService.GetById(id);
 
-                CategoryDeleteViewModel model = new CategoryDeleteViewModel()
-                {
-                    Name=category.Name
-                };
+                var model = Mapper.Map<CategoryDeleteViewModel>(category);
 
                 return View(model);
             }
 
-            this.categoryService.Delete(id);
+            categoryService.Delete(id);
 
-            this.TempData["success"] = SuccessMessages.CategoryEditSuccess;
+            TempData["success"] = SuccessMessages.CategoryEditSuccess;
 
             return RedirectToAction("All");
         }
@@ -118,27 +109,23 @@ namespace NewsAgency.App.Controllers
         [HttpPost]
         public ActionResult Create(CategoryCreateViewModel model)
         {
-            if (!this.ModelState.IsValid)
-            {
-                return View(model);
-            }
+            if (!ModelState.IsValid) return View(model);
 
-            Category category = new Category()
+            var category = new Category
             {
                 Name = model.Name
             };
 
-            if (this.categoryService.Exist(category.Name))
+            if (categoryService.Exist(category.Name))
             {
-                this.TempData["error"] = ErrorMessages.CategoryAlreadyExist;
+                TempData["error"] = ErrorMessages.CategoryAlreadyExist;
 
                 return View();
             }
-            this.DbContext.Categories.Add(category);
 
-            this.DbContext.SaveChanges();
+            categoryService.SaveItem(category);
 
-            this.TempData["success"] = SuccessMessages.CategoryCreatedSuccess;
+            TempData["success"] = SuccessMessages.CategoryCreatedSuccess;
 
             return RedirectToAction("All");
         }
