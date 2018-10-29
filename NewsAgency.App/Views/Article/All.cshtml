@@ -6,8 +6,8 @@
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 <thead>
 <tr>
-    <th >
-       Title
+    <th>
+        @Html.ActionLink("Title", "All", new { order = "title" })
     </th>
     <th >
       Author
@@ -19,7 +19,7 @@
         Content
     </th>
     <th>
-        CreatedOn
+        @Html.ActionLink("CreatedOn","All",new { order = "createdOn"})
     </th>
     <th colspan="2">
         @Html.ActionLink("Create New Article", "Create", null, new {type = "button", @class = "btn btn-success"})

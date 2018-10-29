@@ -15,10 +15,12 @@ namespace NewsAgency.App.Controllers
     {
 
         private IArticleService articleService;
+        private ICategoryService categoryService;
 
-        public ArticleController(IArticleService articleService)
+        public ArticleController(IArticleService articleService, ICategoryService categoryService)
         {
             this.articleService = articleService;
+            this.categoryService = categoryService;
         }
 
         public ActionResult Details(int id)
@@ -50,9 +52,9 @@ namespace NewsAgency.App.Controllers
             List<AdminArticleViewModel> model = this.articleService.GetByOrderCriterion(order)
                 .Select(a => new AdminArticleViewModel()
                 {
-                    Author = string.Concat(a.Author.FirstName, " ", a.Author.LastName),
+                    Author =a.Author.Username,
                     Category = a.Category.Name,
-                    Content = a.Content.Substring(0, 300) + "...",
+                    Content = a.Content.Substring(0, Math.Min(300,a.Content.Length)) + "...",
                     CreatedOn = a.CreatedOn.ToString("dd-MM-yyyy"),
                     Id = a.Id,
                     Title = a.Title
@@ -77,7 +79,6 @@ namespace NewsAgency.App.Controllers
             ArticleEditViewModel model = new ArticleEditViewModel()
             {
                 Id = article.Id,
-                Category = article.Category,
                 Content = article.Content,
                 Title = article.Title
             };
@@ -85,23 +86,88 @@ namespace NewsAgency.App.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult Edit()
+        public ActionResult Edit(ArticleEditViewModel model)
         {
-            return View();
+            if (!this.ModelState.IsValid)
+            {
+                return View();
+            }
+
+            this.articleService.EditArticle(model.Id, model.Title, model.Content);
+
+            this.TempData["success"] = SuccessMessages.ArticleEditSuccess;
+
+            return RedirectToAction("All");
         }
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int id = 0,string ensure=null)
+        {
+            if (ensure==null)
+            {
+                Article article = this.articleService.GetById(id);
+
+                ArticleDeleteViewModel model = new ArticleDeleteViewModel()
+                {
+                    Author = article.Author,
+                    Title = article.Title
+                };
+
+                return View(model);
+            }
+
+            this.articleService.Delete(id);
+
+            this.TempData["success"] = SuccessMessages.ArticleDeletedSuccess;
+
+            return RedirectToAction("All");
+        }
+
+
+        public ActionResult Create()
         {
             return View();
         }
 
-        public ActionResult Create(int id)
-        {
-            return View();
-        }
         [HttpPost]
-        public ActionResult Create()
+        public ActionResult Create(ArticleCreateViewModel model)
         {
-            return View();
+            if (!this.ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            Category category = this.categoryService.GetByName(model.Category);
+
+            if (category==null)
+            {
+                category = new Category()
+                {
+                    Name = model.Category
+                };
+            }
+
+            string username = this.User.Identity.Name;
+
+            Author author = new Author()
+            {
+                Username = username
+            };
+
+            Article article = new Article()
+            {
+                Title = model.Title,
+                Author = author,
+                Category = category,
+                Content = model.Content,
+                CreatedOn = DateTime.UtcNow,
+                Likes = new Like() { Value = 0}
+            };
+
+            this.DbContext.Articles.Add(article);
+            this.DbContext.SaveChanges();
+
+            this.TempData["success"] = SuccessMessages.ArticleCreatedSuccess;
+
+            return RedirectToAction("All");
         }
 
     }

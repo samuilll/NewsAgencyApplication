@@ -11,10 +11,10 @@ namespace NewsAgency.App.Models.Articles
     {
         public int Id { get; set; }
 
+        [Required]
+        [StringLength(maximumLength: 30, MinimumLength = 3)]
         public string Title { get; set; }
-
+        [Required]
         public string Content { get; set; }
-
-        public Category Category  { get; set; }
     }
 }

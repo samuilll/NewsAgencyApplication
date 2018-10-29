@@ -10,9 +10,7 @@ namespace New.Models
         }
         public int Id { get; set; }
 
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
+        public string Username { get; set; }
 
         public virtual ICollection<Article> Articles{ get; set; }
     }

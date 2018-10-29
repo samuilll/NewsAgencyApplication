@@ -12,5 +12,9 @@ namespace NewsAgency.Services.Contracts
         Article GetById(int id);
 
         ICollection<Article> GetByOrderCriterion(string order);
+
+        void EditArticle(int id, string title, string content);
+
+        void Delete(int id);
     }
 }

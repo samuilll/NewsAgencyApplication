@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,8 +16,7 @@ namespace NewsAgency.App.Controllers
 
         public ActionResult Index()
         {
-            this.DbContext.SaveChanges();
-
+           
             List<ArticleViewModel> mostPopularArticles = this.DbContext
                 .Articles
                 .OrderByDescending(a => a.Likes.Value)
@@ -25,8 +25,7 @@ namespace NewsAgency.App.Controllers
                     Id=a.Id,
                     Author = new AuthorViewModel()
                     {
-                        FirstName = a.Author.FirstName,
-                        LastName = a.Author.LastName
+                         Username = a.Author.Username,
                     },
                     Title = a.Title,                  
                 })
@@ -47,8 +46,7 @@ namespace NewsAgency.App.Controllers
                             Title = a.Title,
                             Author = new AuthorViewModel()
                             {
-                                FirstName = a.Author.FirstName,
-                                LastName = a.Author.LastName
+                                Username = a.Author.Username,
                             },
                         }).ToList()                        
                 })

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Globalization;
 using System.Linq;
 using New.Models;
 
@@ -73,49 +74,38 @@ namespace News.Repository
                 {
                     new Author()
                     {
-                         FirstName  = "Ivan",
-                        LastName = "Goshev"
+                         Username  = "Ivan",
                     },
                     new Author()
                     {
-                        FirstName  = "Marina",
-                        LastName = "Tscetaeva"
+                        Username  = "Marina",
                     },new Author()
                     {
-                        FirstName  = "Isabela",
-                        LastName = "Bosh"
+                        Username  = "Isabela",
                     },new Author()
                     {
-                        FirstName  = "Penka",
-                        LastName = "Ivanova"
+                        Username  = "Penka",
                     },new Author()
                     {
-                        FirstName  = "Mitro",
-                        LastName = "Penev"
+                        Username  = "Mitro",
                     },new Author()
                     {
-                        FirstName  = "Hristo",
-                        LastName = "Vladigerov"
+                        Username  = "Hristo",
                     },new Author()
                     {
-                        FirstName  = "Tsvetanka",
-                        LastName = "Biurova"
+                        Username  = "Tsvetanka",
                     },new Author()
                     {
-                        FirstName  = "Magdalena",
-                        LastName = "Irenska"
+                        Username  = "Magdalena",
                     },new Author()
                     {
-                        FirstName  = "Bonka",
-                        LastName = "Boneva"
+                        Username  = "Bonka",
                     },new Author()
                     {
-                        FirstName  = "Vasilen",
-                        LastName = "Sitov"
+                        Username  = "Vasilen",
                     },new Author()
                     {
-                        FirstName  = "Miro",
-                        LastName = "Mironkov"
+                        Username  = "Miro",
                     }
                 };
 
@@ -123,7 +113,6 @@ namespace News.Repository
                 {
                     new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[0],
                         Category = categories[1],
                         Title = "Yesterday",
@@ -136,7 +125,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[5],
                         Category = categories[7],
                         Title = "Barcelona",
@@ -148,7 +136,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[3],
                         Category = categories[7],
                         Title = "80's",
@@ -160,7 +147,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[8],
                         Category = categories[5],
                         Title = "Stella",
@@ -173,7 +159,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[3],
                         Category = categories[6],
                         Title = "Bomb",
@@ -186,7 +171,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[2],
                         Category = categories[8],
                         Title = "LastYear",
@@ -199,7 +183,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[0],
                         Category = categories[1],
                         Title = "Tomorrow",
@@ -212,7 +195,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[0],
                         Category = categories[1],
                         Title = "CookedMeat",
@@ -225,7 +207,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[4],
                         Category = categories[4],
                         Title = "Chikago Bulls Title",
@@ -238,7 +219,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[6],
                         Category = categories[2],
                         Title = "BeforeWar",
@@ -251,7 +231,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[1],
                         Category = categories[0],
                         Title = "Hi",
@@ -264,7 +243,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[4],
                         Category = categories[8],
                         Title = "Preferential Prices",
@@ -277,7 +255,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[0],
                         Category = categories[1],
                         Title = "Bau",
@@ -290,7 +267,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[2],
                         Category = categories[8],
                         Title = "CartingRace",
@@ -303,7 +279,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[5],
                         Category = categories[5],
                         Title = "NO,no,no",
@@ -316,7 +291,6 @@ namespace News.Repository
                     },
                       new Article()
                     {
-                        CreatedOn = DateTime.UtcNow,
                         Author = authors[2],
                         Category = categories[8],
                         Title = "Never",
@@ -338,6 +312,32 @@ namespace News.Repository
                 {
                     context.Authors.Add(author);
                 }
+
+
+                foreach (var article in articles)
+                {
+                    if (article.Title.Length % 5 == 0)
+                    {
+                        article.CreatedOn = DateTime.ParseExact("11-05-2005", "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                    }
+                    else if (article.Title.Length % 4 == 0)
+                    {
+                        article.CreatedOn = DateTime.ParseExact("30-01-1991", "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                    }
+                    else if (article.Title.Length % 3 == 0)
+                    {
+                        article.CreatedOn = DateTime.ParseExact("12-08-2010", "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                    }
+                    else if (article.Title.Length % 2 == 0)
+                    {
+                        article.CreatedOn = DateTime.ParseExact("23-10-2015", "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                    }
+                    else
+                    {
+                        article.CreatedOn = DateTime.UtcNow;
+                    }
+                }
+
                 foreach (Article article in articles)
                 {
                     context.Articles.Add(article);

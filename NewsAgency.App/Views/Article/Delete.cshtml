@@ -1,0 +1,11 @@
+﻿@model NewsAgency.App.Models.Articles.ArticleDeleteViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="well">
+    <span class="text-warning">Are you suer you wnat to delete @Model.Title by @Model.Author.Username</span>
+    @Html.ActionLink("Back to all", "All", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "Delete", new { ensure = "yes"}, new { @class = "btn btn-primary" })
+</div>
