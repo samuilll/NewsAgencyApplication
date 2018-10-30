@@ -6,11 +6,11 @@ using System.Data;
 
 namespace New.Models
 {
-   public class Category
+    public class Category
     {
         public Category()
         {
-           this.Articles = new List<Article>();
+            this.Articles = new List<Article>();
         }
 
         [Key]

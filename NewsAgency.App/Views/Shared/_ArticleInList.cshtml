@@ -2,14 +2,14 @@
 
 
 <div>
-<span>
-    @Html.ActionLink(
-        linkText: @Model.Title,
-        actionName: "Details",
-        routeValues: new { id = Model.Id},
-        controllerName:"Article",
-        htmlAttributes:null)
-</span>
+    <span>
+        @Html.ActionLink(
+            linkText: @Model.Title,
+            actionName: "Details",
+            routeValues: new {id = Model.Id},
+            controllerName: "Article",
+            htmlAttributes: null)
+    </span>
     <h6>
         WrittenBy: @Model.Author.Username
     </h6>

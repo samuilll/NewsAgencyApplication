@@ -162,15 +162,16 @@ namespace NewsAgency.App.Controllers
 
             return RedirectToAction("All");
         }
+
         public ActionResult Like(int id)
         {
             Like like = new Like()
-                {
-                    ArticleId = id,
-                    Value = this.User.Identity.GetUserName()
-                };
+            {
+                ArticleId = id,
+                Value = this.User.Identity.GetUserName()
+            };
 
-                this.DbContext.Likes.Add(like);
+            this.DbContext.Likes.Add(like);
 
             try
             {
@@ -178,11 +179,12 @@ namespace NewsAgency.App.Controllers
             }
             catch (Exception)
             {
-                return RedirectToAction("Details", new { id = id });
+                return RedirectToAction("Details", new {id = id});
             }
 
-            return RedirectToAction("Details",new {id=id});
+            return RedirectToAction("Details", new {id = id});
         }
+
         public ActionResult Dislike(int id)
         {
             Like like = this.DbContext.Likes.FirstOrDefault(l => l.ArticleId == id
@@ -194,10 +196,10 @@ namespace NewsAgency.App.Controllers
             }
             catch (Exception)
             {
-                return RedirectToAction("Details", new { id = id });
+                return RedirectToAction("Details", new {id = id});
             }
 
-            return RedirectToAction("Details", new {id=id});
+            return RedirectToAction("Details", new {id = id});
         }
     }
 }

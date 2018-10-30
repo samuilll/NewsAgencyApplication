@@ -10,12 +10,13 @@ namespace New.Models
         {
             this.Articles = new List<Article>();
         }
+
         public int Id { get; set; }
 
         [DisplayName("Author")]
         [MaxLength(200)]
         public string Username { get; set; }
 
-        public virtual ICollection<Article> Articles{ get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
     }
 }

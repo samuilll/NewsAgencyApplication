@@ -5,9 +5,9 @@ using System.Text;
 
 namespace News.Repository
 {
-   public class Constants
-   {
-       public const string ConnectionString =
-           @"Server=(localdb)\MSSQLLocalDB;Database=NewsDatabase;Integrated Security=True;";
-   }
+    public class Constants
+    {
+        public const string ConnectionString =
+            @"Server=(localdb)\MSSQLLocalDB;Database=NewsDatabase;Integrated Security=True;";
+    }
 }

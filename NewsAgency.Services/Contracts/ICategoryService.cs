@@ -7,7 +7,7 @@ namespace NewsAgency.Services.Contracts
 {
     public interface ICategoryService
     {
-        Category GetByName(string categoryName);  
+        Category GetByName(string categoryName);
 
         List<Category> GetAllByCriteria(string order);
 

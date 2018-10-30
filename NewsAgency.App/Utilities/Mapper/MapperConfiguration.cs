@@ -21,11 +21,11 @@ namespace NewsAgency.App.Utilities.Mapper
                 .ReverseMap();
 
             CreateMap<Article, ArticleAdminViewModel>()
-                .ForMember(dest=>dest.Likes,opt=>opt.MapFrom(src=>src.Likes.Count))
+                .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.Likes.Count))
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author.Username))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
                 .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn.ToString("dd-MM-yyyy")))
-                .ForMember(dest => dest.Content, opt => opt.MapFrom(src => 
+                .ForMember(dest => dest.Content, opt => opt.MapFrom(src =>
                     src.Content.Substring(0, Math.Min(300, src.Content.Length)) + "..."))
                 .ReverseMap();
 
@@ -46,10 +46,6 @@ namespace NewsAgency.App.Utilities.Mapper
             CreateMap<Category, EditCategoryInputModel>().ReverseMap();
 
             CreateMap<Category, CategoryDeleteViewModel>().ReverseMap();
-
-
-
-
 
 
             //CreateMap<SupplierDto, Supplier>().ReverseMap();

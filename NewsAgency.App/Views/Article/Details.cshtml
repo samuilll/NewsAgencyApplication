@@ -7,71 +7,69 @@
 <h2>Details</h2>
 
 
-
 <div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+<hr/>
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Title)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.Title)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Author.Username)
-        </dt>
+    <dt>
+        @Html.DisplayNameFor(model => model.Author.Username)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Author.Username)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.Author.Username)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
+    <dt>
+        @Html.DisplayNameFor(model => model.Content)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.Content)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
-        </dt>
+    <dt>
+        @Html.DisplayNameFor(model => model.CreatedOn)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedOn)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.CreatedOn)
+    </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Likes)
-        </dt>
+    <dt>
+        @Html.DisplayNameFor(model => model.Likes)
+    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Likes)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.Likes)
+    </dd>
 
-        <hr style="border: groove" />
-        <dd>
-            @if (!Model.IsAlreadyLiked)
-            {
-                @Html.ActionLink(
-                    "Like",
-                    "Like",
-                    new{id=Model.Id},
-                    new { @class = "btn btn-info center-block col-md-1"})
-            }
-            else
-            {
-                @Html.ActionLink("Dislike",
-                    "Dislike",
-                    new{id=Model.Id},
-                    new { @class = "btn btn-info center-block col-md-1"})
-            }
-        </dd>
-        <br />
-        <dd>
-            <a href="javascript: history.go(-1)">Go Back</a>
-        </dd>
-    </dl>
-
+    <hr style="border: groove"/>
+    <dd>
+        @if (!Model.IsAlreadyLiked)
+        {
+            @Html.ActionLink(
+                "Like",
+                "Like",
+                new {id = Model.Id},
+                new {@class = "btn btn-info center-block col-md-1"})
+        }
+        else
+        {
+            @Html.ActionLink("Dislike",
+                "Dislike",
+                new {id = Model.Id},
+                new {@class = "btn btn-info center-block col-md-1"})
+        }
+    </dd>
+    <br/>
+    <dd>
+        <a href="javascript: history.go(-1)">Go Back</a>
+    </dd>
+</dl>

@@ -6,9 +6,8 @@ using New.Models;
 
 namespace News.Repository
 {
-    public class NewsDbContext:IdentityDbContext<User>
+    public class NewsDbContext : IdentityDbContext<User>
     {
-
         public IDbSet<Article> Articles { get; set; }
 
         public IDbSet<Category> Categories { get; set; }

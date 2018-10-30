@@ -2,6 +2,7 @@
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(NewsAgency.App.Startup))]
+
 namespace NewsAgency.App
 {
     public partial class Startup

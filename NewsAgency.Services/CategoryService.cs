@@ -14,6 +14,7 @@ namespace NewsAgency.Services
         {
             this.context = context;
         }
+
         public Category GetByName(string categoryName)
         {
             return this.context.Categories.FirstOrDefault(c => c.Name == categoryName);
@@ -21,7 +22,6 @@ namespace NewsAgency.Services
 
         public List<Category> GetAllByCriteria(string order)
         {
-           
             switch (order.ToLower())
             {
                 case "default":

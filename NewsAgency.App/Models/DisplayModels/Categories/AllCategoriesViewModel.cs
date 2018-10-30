@@ -7,6 +7,5 @@ namespace NewsAgency.App.Models.DisplayModels.Categories
         public List<CategoryViewModel> Categories { get; set; }
 
         public PagingInfo PagingInfo { get; set; }
-
     }
 }

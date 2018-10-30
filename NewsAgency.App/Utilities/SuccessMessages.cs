@@ -18,7 +18,5 @@ namespace NewsAgency.App.Utilities
         public const string CategoryCreatedSuccess = "Successfully created category!";
 
         public const string CategoryDeletedSuccess = "Successfully deleted category!";
-
-
     }
 }

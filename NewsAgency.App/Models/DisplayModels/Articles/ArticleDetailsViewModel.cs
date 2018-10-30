@@ -6,8 +6,7 @@ namespace NewsAgency.App.Models.DisplayModels.Articles
 {
     public class ArticleDetailsViewModel
     {
-        [Key]
-        public int Id { get; set; }
+        [Key] public int Id { get; set; }
 
         public string Title { get; set; }
 
@@ -19,8 +18,7 @@ namespace NewsAgency.App.Models.DisplayModels.Articles
 
         public int Likes { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime CreatedOn { get; set; }
+        [DataType(DataType.Date)] public DateTime CreatedOn { get; set; }
 
         public bool IsAlreadyLiked { get; set; }
     }

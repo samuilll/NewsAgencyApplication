@@ -6,7 +6,7 @@ namespace NewsAgency.App.Models.InputModels.Account
     {
         [Required]
         [Display(Name = "Username")]
-        [StringLength(maximumLength:20,MinimumLength = 3)]
+        [StringLength(maximumLength: 20, MinimumLength = 3)]
         public string Username { get; set; }
 
         [Required]

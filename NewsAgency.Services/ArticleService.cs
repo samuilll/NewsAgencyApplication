@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace NewsAgency.Services
 {
-    public class ArticleService:IArticleService
+    public class ArticleService : IArticleService
     {
         private NewsDbContext context;
 
@@ -48,7 +48,6 @@ namespace NewsAgency.Services
 
         public ICollection<Article> GetByOrderCriterion(string order)
         {
-
             switch (order.ToLower())
             {
                 case "default":
@@ -57,7 +56,7 @@ namespace NewsAgency.Services
                 }
                 case "title":
                 {
-                    return this.context.Articles.OrderBy(a=>a.Title).ToList();
+                    return this.context.Articles.OrderBy(a => a.Title).ToList();
                 }
                 case "createdon":
                 {

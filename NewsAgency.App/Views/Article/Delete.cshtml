@@ -9,6 +9,6 @@
 <div class="well">
     <span class="text-warning">Are you sure you want to delete @Model.Title by @Model.Author.Username?</span>
     <hr/>
-    @Html.ActionLink("Back to all", "All", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Delete", "Delete", new { ensure = "yes" }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to all", "All", null, new {@class = "btn btn-primary"})
+    @Html.ActionLink("Delete", "Delete", new {ensure = "yes"}, new {@class = "btn btn-primary"})
 </div>

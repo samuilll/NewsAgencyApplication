@@ -7,7 +7,7 @@ namespace NewsAgency.App.Models.InputModels.Categories
         public int Id { get; set; }
 
         [Required]
-        [StringLength(maximumLength:200,MinimumLength = 3)]
+        [StringLength(maximumLength: 200, MinimumLength = 3)]
         public string Name { get; set; }
     }
 }

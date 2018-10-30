@@ -7,7 +7,7 @@ using System.Text;
 
 namespace NewsAgency.Services.Contracts
 {
-   public interface IArticleService
+    public interface IArticleService
     {
         Article GetById(int id);
 

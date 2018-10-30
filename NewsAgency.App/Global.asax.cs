@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,16 +17,15 @@ namespace NewsAgency.App
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-           // AutoMapperInitialize.InitializeMapper();
+            // AutoMapperInitialize.InitializeMapper();
         }
 
         protected void Application_Error(object sender, EventArgs e)
         {
             // Exception lastError = Server.GetLastError();
 
-             Response.Redirect("~/Error");
-           // Context.ClearError();
+            Response.Redirect("~/Error");
+            // Context.ClearError();
         }
-
     }
 }

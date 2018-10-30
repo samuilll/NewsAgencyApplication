@@ -5,39 +5,39 @@
     ViewBag.Title = "All";
 }
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-<thead>
+    <thead>
     <tr>
         <th>
-            @Html.ActionLink("Title", "All", new { order = ViewBag.Order != "Title" ? "Title" : "TitleDescending" })
+            @Html.ActionLink("Title", "All", new {order = ViewBag.Order != "Title" ? "Title" : "TitleDescending"})
         </th>
         <th>
             Author
         </th>
         <th>
-            @Html.ActionLink("Category", "All", new { order = ViewBag.Order != "Category" ? "Category" : "CategoryDescending" })
+            @Html.ActionLink("Category", "All", new {order = ViewBag.Order != "Category" ? "Category" : "CategoryDescending"})
         </th>
         <th>
             Content
         </th>
         <th>
-            @Html.ActionLink("Likes/Dislikes", "All", new { order = ViewBag.Order != "LikesCount" ? "LikesCount" : "LikesCountDescending" })
+            @Html.ActionLink("Likes/Dislikes", "All", new {order = ViewBag.Order != "LikesCount" ? "LikesCount" : "LikesCountDescending"})
         </th>
         <th>
-            @Html.ActionLink("CreatedOn", "All", new { order = ViewBag.Order != "CreatedOn" ? "CreatedOn" : "CreatedOnDescending" })
+            @Html.ActionLink("CreatedOn", "All", new {order = ViewBag.Order != "CreatedOn" ? "CreatedOn" : "CreatedOnDescending"})
         </th>
         <th colspan="2">
         </th>
     </tr>
-</thead>
-<tbody>
-@foreach (ArticleAdminViewModel article in Model.Articles)
-{
-    @Html.Partial("_AdminArticleView", article)
-}
-</tbody>
+    </thead>
+    <tbody>
+    @foreach (ArticleAdminViewModel article in Model.Articles)
+    {
+        @Html.Partial("_AdminArticleView", article)
+    }
+    </tbody>
 </table>
 
 
-@Html.PageLinks(Model.PagingInfo,x=>Url.Action("All",new {page=x,order=ViewBag.Order}))
+@Html.PageLinks(Model.PagingInfo, x => Url.Action("All", new {page = x, order = ViewBag.Order}))
 
-@Html.ActionLink("Create New Article", "Create", null, new { type = "button", @class = "btn btn-success" })
+@Html.ActionLink("Create New Article", "Create", null, new {type = "button", @class = "btn btn-success"})
