@@ -26,7 +26,6 @@
             @Html.ActionLink("CreatedOn", "All", new { order = ViewBag.Order != "CreatedOn" ? "CreatedOn" : "CreatedOnDescending" })
         </th>
         <th colspan="2">
-            @Html.ActionLink("Create New Article", "Create", null, new { type = "button", @class = "btn btn-success" })
         </th>
     </tr>
 </thead>
@@ -40,3 +39,5 @@
 
 
 @Html.PageLinks(Model.PagingInfo,x=>Url.Action("All",new {page=x,order=ViewBag.Order}))
+
+@Html.ActionLink("Create New Article", "Create", null, new { type = "button", @class = "btn btn-success" })

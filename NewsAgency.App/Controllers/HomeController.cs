@@ -50,5 +50,11 @@ namespace NewsAgency.App.Controllers
 
             return View(model);
         }
+
+
+        public ActionResult Error()
+        {
+            return View("Error");
+        }
     }
 }

@@ -19,5 +19,13 @@ namespace NewsAgency.App
             BundleConfig.RegisterBundles(BundleTable.Bundles);
            // AutoMapperInitialize.InitializeMapper();
         }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            // Exception lastError = Server.GetLastError();
+
+            Response.Redirect("~/Error");
+           // Context.ClearError();
+        }
     }
 }

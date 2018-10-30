@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.HtmlControls;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using New.Models;
@@ -52,7 +55,6 @@ namespace NewsAgency.App.Controllers
 
             return View(model);
         }
-
 
         public ActionResult Edit(int id)
         {
@@ -113,7 +115,7 @@ namespace NewsAgency.App.Controllers
 
             var category = new Category
             {
-                Name = model.Name
+                Name = HttpUtility.HtmlEncode(model.Name)
             };
 
             if (categoryService.Exist(category.Name))

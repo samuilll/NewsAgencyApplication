@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.Web.Util;
 
 namespace NewsAgency.App.Models.Categories
 {
-    public class CategoryCreateViewModel
+    public class CategoryEditViewModel
     {
+        public int Id { get; set; }
+
         [Required]
-        [StringLength(maximumLength:30,MinimumLength = 3)]
+        [StringLength(maximumLength:20,MinimumLength = 1)]
         public string Name { get; set; }
     }
 }

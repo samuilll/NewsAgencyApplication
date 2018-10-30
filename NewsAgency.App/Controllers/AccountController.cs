@@ -104,6 +104,10 @@ namespace NewsAgency.App.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Error()
+        {
+            return View("Error");
+        }
         //protected override void Dispose(bool disposing)
         //{
         //    if (disposing)

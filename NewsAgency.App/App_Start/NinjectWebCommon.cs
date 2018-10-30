@@ -69,7 +69,9 @@ namespace NewsAgency.App.App_Start
 
             kernel.Bind<IArticleService>().To<ArticleService>().InRequestScope();
             kernel.Bind<ICategoryService>().To<CategoryService>().InRequestScope();
-            kernel.Bind<NewsDbContext>().ToSelf().InSingletonScope();
+
+            kernel.Bind<NewsDbContext>().ToSelf().InRequestScope();
+
             kernel.Bind<IMapper>().ToMethod(ctx =>
              new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>()), type => ctx.Kernel.Get(type))).InRequestScope();
         }

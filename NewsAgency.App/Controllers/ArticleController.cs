@@ -35,11 +35,9 @@ namespace NewsAgency.App.Controllers
         public ActionResult Details(int id)
         {
             var article = articleService.GetById(id);
-
             if (article == null)
             {
                 TempData["error"] = ErrorMessages.NoSuchArticle;
-
                 return View("/");
             }
 
@@ -47,7 +45,6 @@ namespace NewsAgency.App.Controllers
 
             bool isAlreadyLiked =
                 this.DbContext.Likes.Any(l => l.ArticleId == id && l.Value == this.User.Identity.Name);
-
             model.IsAlreadyLiked = isAlreadyLiked;
 
             return View(model);
@@ -164,31 +161,43 @@ namespace NewsAgency.App.Controllers
 
             return RedirectToAction("All");
         }
-        public ActionResult Like(int articleId)
+        public ActionResult Like(int id)
         {
-            var Request = this.Request.IsAjaxRequest();
             Like like = new Like()
+                {
+                    ArticleId = id,
+                    Value = this.User.Identity.GetUserName()
+                };
+
+                this.DbContext.Likes.Add(like);
+
+            try
             {
-                ArticleId = articleId,
-                Value = this.User.Identity.GetUserName()
-            };
+                this.DbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Details", new { id = id });
+            }
 
-            this.DbContext.Likes.Add(like);
-            this.DbContext.SaveChanges();
-
-            return this.Content(this.DbContext.Likes.Where(l => l.ArticleId == articleId).Count().ToString());
+            return RedirectToAction("Details",new {id=id});
         }
-        public ActionResult Unlike(int articleId)
+        public ActionResult Dislike(int id)
         {
-            var Request = this.Request.IsAjaxRequest();
-
-            Like like = this.DbContext.Likes.FirstOrDefault(l => l.ArticleId == articleId
+            Like like = this.DbContext.Likes.FirstOrDefault(l => l.ArticleId == id
                                                                  && l.Value == this.User.Identity.Name);
 
-            this.DbContext.Likes.Remove(like);
-            this.DbContext.SaveChanges();
+            try
+            {
+                this.DbContext.Likes.Remove(like);
+                this.DbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Details", new { id = id });
+            }
 
-            return this.Content(this.DbContext.Likes.Where(l => l.ArticleId == articleId).Count().ToString());
+            return RedirectToAction("Details", new {id=id});
         }
     }
 }
