@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using New.Models;
-using NewsAgency.App.Models.Articles;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using NewsAgency.App.Models;
-using NewsAgency.App.Models.Categories;
+using NewsAgency.App.Models.DisplayModels.Articles;
+using NewsAgency.App.Models.DisplayModels.Authors;
+using NewsAgency.App.Models.DisplayModels.Categories;
+using NewsAgency.App.Models.InputModels.Articles;
+using NewsAgency.App.Models.InputModels.Categories;
 
 namespace NewsAgency.App.Utilities.Mapper
 {
@@ -17,7 +20,7 @@ namespace NewsAgency.App.Utilities.Mapper
                 .ForMember(dest => dest.Likes, opt => opt.MapFrom(src => src.Likes.Count))
                 .ReverseMap();
 
-            CreateMap<Article, AdminArticleViewModel>()
+            CreateMap<Article, ArticleAdminViewModel>()
                 .ForMember(dest=>dest.Likes,opt=>opt.MapFrom(src=>src.Likes.Count))
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author.Username))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
@@ -26,13 +29,13 @@ namespace NewsAgency.App.Utilities.Mapper
                     src.Content.Substring(0, Math.Min(300, src.Content.Length)) + "..."))
                 .ReverseMap();
 
-            CreateMap<Article, ArticleEditViewModel>().ReverseMap();
+            CreateMap<Article, EditArticleInputModel>().ReverseMap();
 
             CreateMap<Article, ArticleDeleteViewModel>().ReverseMap();
 
             CreateMap<Author, AuthorViewModel>().ReverseMap();
 
-            CreateMap<Article, ArticleViewModel>()
+            CreateMap<Article, ArticleHomeViewModel>()
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author))
                 .ReverseMap();
 
@@ -40,7 +43,7 @@ namespace NewsAgency.App.Utilities.Mapper
                 .ForMember(dest => dest.NumberOfArticles, opt => opt.MapFrom(src => src.Articles.Count))
                 .ReverseMap();
 
-            CreateMap<Category, CategoryEditViewModel>().ReverseMap();
+            CreateMap<Category, EditCategoryInputModel>().ReverseMap();
 
             CreateMap<Category, CategoryDeleteViewModel>().ReverseMap();
 

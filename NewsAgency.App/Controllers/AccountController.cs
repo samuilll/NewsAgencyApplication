@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using New.Models;
 using NewsAgency.App.Models;
+using NewsAgency.App.Models.InputModels.Account;
 
 namespace NewsAgency.App.Controllers
 {
@@ -47,7 +48,7 @@ namespace NewsAgency.App.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginInputModel model, string returnUrl)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -76,7 +77,7 @@ namespace NewsAgency.App.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterInputModel model)
         {
             if (ModelState.IsValid)
             {

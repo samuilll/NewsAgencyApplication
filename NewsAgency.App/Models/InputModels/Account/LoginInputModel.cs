@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace NewsAgency.App.Models
+namespace NewsAgency.App.Models.InputModels.Account
 {
-    public class LoginViewModel
+    public class LoginInputModel
     {
         [Required]
         [Display(Name = "Username")]
@@ -12,6 +12,7 @@ namespace NewsAgency.App.Models
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
+        [StringLength(maximumLength: 30, MinimumLength = 3)]
         public string Password { get; set; }
     }
 }

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using New.Models;
-
-namespace NewsAgency.App.Models.Articles
+﻿namespace NewsAgency.App.Models.DisplayModels.Articles
 {
-    public class AdminArticleViewModel
+    public class ArticleAdminViewModel
     {
         public int Id { get; set; }
 

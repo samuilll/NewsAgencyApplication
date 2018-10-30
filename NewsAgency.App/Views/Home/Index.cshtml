@@ -1,11 +1,12 @@
 ﻿@using New.Models
-@using NewsAgency.App.Models.Articles
-@model NewsAgency.App.Models.Articles.HomeViewModel
+@using NewsAgency.App.Models.DisplayModels.Articles
+@using NewsAgency.App.Models.DisplayModels.Categories
+@model NewsAgency.App.Models.DisplayModels.Articles.HomeViewModel
 
 <div class="well text-justify text-center col-md-12">
     <span class="text-capitalize text-danger">Most liked categories:</span>
     <hr style="border: groove"/>
-    @foreach (ArticleViewModel article in Model.MostPopularArticles)
+    @foreach (ArticleHomeViewModel article in Model.MostPopularArticles)
     {
         @Html.Partial("_ArticleInList", article)
     }
@@ -16,7 +17,7 @@
     <div class="well text-justify text-center col-md-12">
         <span> @categoryWithArticles.Name:</span>
 
-        @foreach (ArticleViewModel article in categoryWithArticles.LatestArticles)
+        @foreach (ArticleHomeViewModel article in categoryWithArticles.LatestArticles)
         {
             @Html.Partial("_ArticleInList", article)
         }

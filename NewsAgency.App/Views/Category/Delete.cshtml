@@ -1,4 +1,4 @@
-﻿@model NewsAgency.App.Models.Categories.CategoryDeleteViewModel
+﻿@model NewsAgency.App.Models.DisplayModels.Categories.CategoryDeleteViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -7,7 +7,8 @@
 <h2>Delete Category</h2>
 
 <div class="well">
-    <span class="text-warning">Are you sure you want to delete @Model.Name</span>
+    <span class="text-warning">Are you sure you want to delete @Model.Name?</span>
+    <hr/>
     @Html.ActionLink("Back to all", "All", null, new { @class = "btn btn-primary" })
     @Html.ActionLink("Delete", "Delete", new { ensure = "yes" }, new { @class = "btn btn-primary" })
 </div>

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using AutoMapper;
-
-namespace NewsAgency.App.App_Start
+﻿namespace NewsAgency.App
 {
     public  class AutoMapperInitialize
     {

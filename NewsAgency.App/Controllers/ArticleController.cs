@@ -7,7 +7,8 @@ using Microsoft.AspNet.Identity;
 using New.Models;
 using News.Repository;
 using NewsAgency.App.Models;
-using NewsAgency.App.Models.Articles;
+using NewsAgency.App.Models.DisplayModels.Articles;
+using NewsAgency.App.Models.InputModels.Articles;
 using NewsAgency.App.Utilities;
 using NewsAgency.Services.Contracts;
 
@@ -58,7 +59,7 @@ namespace NewsAgency.App.Controllers
                     .Skip((page - 1) * PerPageArticles)
                     .Take(PerPageArticles)
                     .AsQueryable()
-                    .ProjectTo<AdminArticleViewModel>(Mapper.ConfigurationProvider)
+                    .ProjectTo<ArticleAdminViewModel>(Mapper.ConfigurationProvider)
                     .ToList(),
                 PagingInfo = new PagingInfo
                 {
@@ -84,13 +85,13 @@ namespace NewsAgency.App.Controllers
                 return View("All");
             }
 
-            var model = Mapper.Map<ArticleEditViewModel>(article);
+            var model = Mapper.Map<EditArticleInputModel>(article);
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(ArticleEditViewModel model)
+        public ActionResult Edit(EditArticleInputModel model)
         {
             if (!ModelState.IsValid) return View();
 
@@ -122,7 +123,7 @@ namespace NewsAgency.App.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(ArticleCreateViewModel model)
+        public ActionResult Create(CreateArticleInputModel model)
         {
             if (!ModelState.IsValid) return View(model);
 
@@ -186,7 +187,6 @@ namespace NewsAgency.App.Controllers
         {
             Like like = this.DbContext.Likes.FirstOrDefault(l => l.ArticleId == id
                                                                  && l.Value == this.User.Identity.Name);
-
             try
             {
                 this.DbContext.Likes.Remove(like);

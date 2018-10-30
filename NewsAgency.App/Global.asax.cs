@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,8 +25,9 @@ namespace NewsAgency.App
         {
             // Exception lastError = Server.GetLastError();
 
-            Response.Redirect("~/Error");
+             Response.Redirect("~/Error");
            // Context.ClearError();
         }
+
     }
 }

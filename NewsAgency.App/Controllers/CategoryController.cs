@@ -8,7 +8,8 @@ using AutoMapper.QueryableExtensions;
 using New.Models;
 using News.Repository;
 using NewsAgency.App.Models;
-using NewsAgency.App.Models.Categories;
+using NewsAgency.App.Models.DisplayModels.Categories;
+using NewsAgency.App.Models.InputModels.Categories;
 using NewsAgency.App.Utilities;
 using NewsAgency.Services.Contracts;
 
@@ -67,13 +68,13 @@ namespace NewsAgency.App.Controllers
                 return View("All");
             }
 
-            var model = Mapper.Map<CategoryEditViewModel>(category);
+            var model = Mapper.Map<EditCategoryInputModel>(category);
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(CategoryEditViewModel model)
+        public ActionResult Edit(EditCategoryInputModel model)
         {
             if (!ModelState.IsValid) return View();
 
@@ -109,7 +110,7 @@ namespace NewsAgency.App.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CategoryCreateViewModel model)
+        public ActionResult Create(CreateCategoryInputModel model)
         {
             if (!ModelState.IsValid) return View(model);
 

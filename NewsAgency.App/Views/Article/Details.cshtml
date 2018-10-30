@@ -1,4 +1,4 @@
-﻿@model NewsAgency.App.Models.Articles.ArticleDetailsViewModel
+﻿@model NewsAgency.App.Models.DisplayModels.Articles.ArticleDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -59,23 +59,19 @@
                     "Like",
                     "Like",
                     new{id=Model.Id},
-                    new { @class = "btn btn-info center-block col-md-1" })
+                    new { @class = "btn btn-info center-block col-md-1"})
             }
             else
             {
                 @Html.ActionLink("Dislike",
                     "Dislike",
                     new{id=Model.Id},
-                    new { @class = "btn btn-info center-block col-md-1" })
+                    new { @class = "btn btn-info center-block col-md-1"})
             }
         </dd>
         <br />
         <dd>
-            @Html.ActionLink("Back",
-                "Index",
-                "Home",
-                null,
-                new {@class = "btn btn-info center-block col-md-1"})
+            <a href="javascript: history.go(-1)">Go Back</a>
         </dd>
     </dl>
 

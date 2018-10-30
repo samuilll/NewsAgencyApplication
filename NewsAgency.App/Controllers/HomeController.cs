@@ -4,7 +4,8 @@ using System.Web.Mvc;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using News.Repository;
-using NewsAgency.App.Models.Articles;
+using NewsAgency.App.Models.DisplayModels.Articles;
+using NewsAgency.App.Models.DisplayModels.Categories;
 
 namespace NewsAgency.App.Controllers
 {
@@ -25,7 +26,7 @@ namespace NewsAgency.App.Controllers
                 .Articles
                 .OrderByDescending(a => a.Likes.Count)
                 .AsQueryable()
-                .ProjectTo<ArticleViewModel>(Mapper.ConfigurationProvider)
+                .ProjectTo<ArticleHomeViewModel>(Mapper.ConfigurationProvider)
                 .Take(3)
                 .ToList();
 
@@ -37,7 +38,7 @@ namespace NewsAgency.App.Controllers
                     Name = c.Name,
                     LatestArticles = c.Articles.OrderBy(a => a.Id).Skip(Math.Max(0, c.Articles.Count() - 3))
                         .AsQueryable()
-                        .ProjectTo<ArticleViewModel>(Mapper.ConfigurationProvider)
+                        .ProjectTo<ArticleHomeViewModel>(Mapper.ConfigurationProvider)
                         .ToList()
                 })
                 .ToList();

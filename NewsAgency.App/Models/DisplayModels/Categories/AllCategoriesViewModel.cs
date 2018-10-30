@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
-namespace NewsAgency.App.Models.Categories
+namespace NewsAgency.App.Models.DisplayModels.Categories
 {
     public class AllCategoriesViewModel
     {

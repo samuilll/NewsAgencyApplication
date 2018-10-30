@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace NewsAgency.App.Models
+namespace NewsAgency.App.Models.InputModels.Account
 {
-    public class RegisterViewModel
+    public class RegisterInputModel
     {
         [Required]
         [StringLength(maximumLength: 20, MinimumLength = 3)]

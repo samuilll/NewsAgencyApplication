@@ -1,11 +1,11 @@
-﻿@model NewsAgency.App.Models.Articles.AdminArticleViewModel
+﻿@model NewsAgency.App.Models.DisplayModels.Articles.ArticleAdminViewModel
 
 @{
     ViewBag.Title = "_AdminArticleView";
 }
 
 <tr>
-    <td>@Model.Title</td>
+    <td>@Html.ActionLink(Model.Title,"Details",new{id=Model.Id})</td>
     <td>@Model.Author</td>
     <td>@Model.Category</td>
     <td>@Model.Content</td>

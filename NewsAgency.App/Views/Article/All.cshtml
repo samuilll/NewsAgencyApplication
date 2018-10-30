@@ -1,6 +1,6 @@
 ﻿@using NewsAgency.App.HtmlHelpers
-@using NewsAgency.App.Models.Articles
-@model NewsAgency.App.Models.Articles.AllArticlesViewModel
+@using NewsAgency.App.Models.DisplayModels.Articles
+@model NewsAgency.App.Models.DisplayModels.Articles.AllArticlesViewModel
 @{
     ViewBag.Title = "All";
 }
@@ -30,7 +30,7 @@
     </tr>
 </thead>
 <tbody>
-@foreach (AdminArticleViewModel article in Model.Articles)
+@foreach (ArticleAdminViewModel article in Model.Articles)
 {
     @Html.Partial("_AdminArticleView", article)
 }

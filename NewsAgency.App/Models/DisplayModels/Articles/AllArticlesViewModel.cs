@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
-namespace NewsAgency.App.Models.Articles
+namespace NewsAgency.App.Models.DisplayModels.Articles
 {
     public class AllArticlesViewModel
     {
-        public List<AdminArticleViewModel> Articles { get; set; }
+        public List<ArticleAdminViewModel> Articles { get; set; }
 
         public PagingInfo PagingInfo { get; set; }
 
